@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id="reloadBtn"><i class="fa-solid fa-rotate"></i></button>
+    <button id="toastBtn"><i class="fa-regular fa-bookmark"></i> Save Post</button>
+
+    <div class="toast hide">
+        <span class="fa-regular fa-circle-check"></span>
+        <span class="message">Saved Successfully</span>
+        <div class="closeButton">
+            <span class="fa-solid fa-xmark"></span>
+        </div>
+    </div>
+    
+    <script>
+        let time;
+        const runTimer = () => {
+            time = setTimeout(function(){
+            $('.toast').removeClass("show");
+            $('.toast').addClass("hide");
+            },2500);
+        }
+
+        $("#toastBtn").click(function(){
+            $('.toast').addClass("show");
+            $('.toast').removeClass("hide");
+            $('.toast').addClass("showToast");
+            $("#toastBtn").html("<i class='fa-solid fa-bookmark'></i> Saved Post");
+            runTimer();
+        });
+
+        $('.closeButton').click(
+            function() {
+                $('.toast').removeClass("show");
+                $('.toast').addClass("hide");
+            });
+        
+        $(".toast").hover(
+            function(){
+                clearTimeout(time);
+            },function(){
+                runTimer();
+            }
+        );
+
+        $('#reloadBtn').click(function(){
+            location.reload();
+        });
+    </script>
+</body>
+</html>
